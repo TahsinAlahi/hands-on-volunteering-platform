@@ -30,6 +30,8 @@ app.get("/", (_req, res) => {
   res.send("This is Handson Backend");
 });
 
+app.use("/api/auth", require("./routes/auth.route.js"));
+
 // All other unknown routes
 app.get("*", (_req, _res) => {
   throw createHttpErrors(404, "Route not found");
