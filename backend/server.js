@@ -30,6 +30,30 @@ app.get("/", (_req, res) => {
   res.send("This is Handson Backend");
 });
 
+// All other unknown routes
+app.get("*", (_req, _res) => {
+  throw createHttpErrors(404, "Route not found");
+});
+
+// Error handler
+app.use((err, _req, res, _next) => {
+  let errorCode = 500;
+  let errorMessage = "Something went wrong";
+
+  if (createHttpErrors.isHttpError(err)) {
+    errorCode = err.statusCode;
+    errorMessage = err.message;
+  }
+
+  console.log(`${errorCode} - ${errorMessage}`);
+
+  res.status(errorCode).json({
+    success: false,
+    message: errorMessage,
+  });
+});
+
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI).then(
   () => {
     console.log("Connected to MongoDB");
