@@ -1,13 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 const authContext = createContext(null);
 
 function AuthProvider({ children }) {
   const axiosPublic = useAxiosPublic();
   const [isAuthLoading, setIsAuthLoading] = useState(true);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   async function signup(name, email, password) {
     setIsAuthLoading(true);
@@ -50,7 +54,7 @@ function AuthProvider({ children }) {
         });
 
         toast.success("Login successful");
-        return { status: "succes" };
+        return { status: "success" };
       }
     } catch (error) {
       if (error?.response?.status === 401) {
@@ -68,11 +72,14 @@ function AuthProvider({ children }) {
     }
   }
 
+  // set user in localstorage
   useEffect(() => {
-    // async function getUser() {
-    // const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-    // }
-  }, []);
+    isAuthLoading(true);
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
+    isAuthLoading(false);
+  }, [user]);
 
   const value = { signup, isAuthLoading, login, user };
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
