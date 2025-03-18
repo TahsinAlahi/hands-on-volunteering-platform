@@ -34,6 +34,7 @@ app.get("/", (_req, res) => {
 app.use("/api/auth", require("./routes/auth.route.js"));
 app.use("/api/users", require("./routes/users.route.js"));
 app.use("/api/events", require("./routes/events.route.js"));
+app.use("/api/help", require("./routes/help.route.js"));
 
 // All other unknown routes
 app.get("*", (_req, _res) => {

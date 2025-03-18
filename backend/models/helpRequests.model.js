@@ -9,7 +9,11 @@ const helpRequestSchema = new mongoose.Schema(
       enum: ["Low", "Medium", "Urgent"],
       required: true,
     },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     responses: [
       {
         userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
