@@ -4,7 +4,7 @@ import bgImage from "../assets/homepage-bg.jpg";
 function HomePage() {
   return (
     <div
-      className="w-screen h-screen bg-cover bg-right-bottom md:bg-left lg:bg-center bg-blend-multiply bg-black/45"
+      className="w-screen h-[calc(100vh-56px)] lg:h-[calc(100vh-58px)] bg-cover bg-right-bottom md:bg-left lg:bg-center bg-blend-multiply bg-black/45"
       style={{
         backgroundImage: `url(${bgImage})`,
       }}
