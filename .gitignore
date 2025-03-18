@@ -9,3 +9,14 @@ node_modules
 
 #vscode settings
 .vscode
+
+#logs
+logs
+*.log
+
+#
+dist
+dist-ssr
+*.local
+
+
