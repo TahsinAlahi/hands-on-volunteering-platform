@@ -30,7 +30,9 @@ app.get("/", (_req, res) => {
   res.send("This is Handson Backend");
 });
 
+// Routes
 app.use("/api/auth", require("./routes/auth.route.js"));
+app.use("/api/users", require("./routes/users.route.js"));
 
 // All other unknown routes
 app.get("*", (_req, _res) => {
