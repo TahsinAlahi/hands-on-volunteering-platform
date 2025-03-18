@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import logoImg from "/logo.svg";
+import { useAuth } from "../providers/AuthProvider";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // TODO: change it later
-  const user = false;
-  function logout() {}
+  const { user, logout } = useAuth();
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);

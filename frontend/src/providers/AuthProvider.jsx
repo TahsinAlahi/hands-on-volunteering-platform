@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { toast } from "react-toastify";
-import Cookies from "js-cookie";
 
 const authContext = createContext(null);
 
@@ -72,16 +71,35 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function logout() {
+    setIsAuthLoading(true);
+    try {
+      const res = await axiosPublic.post("/auth/logout");
+      if (res.status === 200) {
+        setUser(null);
+        localStorage.removeItem("user");
+        toast.success("Logout successful");
+        return { status: "success" };
+      }
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      toast.error("Something went wrong");
+      return { status: "error", message: "Something went wrong" };
+    }
+  }
+
   // set user in localstorage
   useEffect(() => {
-    isAuthLoading(true);
+    setIsAuthLoading(true);
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
     }
-    isAuthLoading(false);
+    setIsAuthLoading(false);
   }, [user]);
 
-  const value = { signup, isAuthLoading, login, user };
+  if (isAuthLoading) return <h1>Loading...</h1>;
+
+  const value = { signup, isAuthLoading, login, user, logout };
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 }
 
