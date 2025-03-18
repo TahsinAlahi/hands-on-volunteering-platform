@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+app.use(express.json());
 app.use(morgan("tiny"));
 
 app.use(express.json());
@@ -19,9 +20,9 @@ app.use(cookieParser());
 app.use(
   cors({
     // TODO: Fix this origin for production
-    origin: "*",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: "*",
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );

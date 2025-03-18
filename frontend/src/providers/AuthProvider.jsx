@@ -6,7 +6,7 @@ const authContext = createContext(null);
 function AuthProvider({ children }) {
   const axiosPublic = useAxiosPublic();
   const [isAuthLoading, setIsAuthLoading] = useState(true);
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
 
   async function signup(name, email, password) {
     setIsAuthLoading(true);
@@ -27,21 +27,24 @@ function AuthProvider({ children }) {
   async function login(email, password) {
     setIsAuthLoading(true);
 
+    console.log(email, password);
+
     try {
       const res = await axiosPublic.post("/auth/login", {
         email,
         password,
       });
-      console.log(res);
+      console.log(res.data);
+      return { status: "success" };
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    async function getUser() {
-      // const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-    }
+    // async function getUser() {
+    // const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+    // }
   }, []);
 
   const value = { signup, isAuthLoading, login };
