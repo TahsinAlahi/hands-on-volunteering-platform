@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { toast } from "react-toastify";
 
 const authContext = createContext(null);
 
 function AuthProvider({ children }) {
   const axiosPublic = useAxiosPublic();
   const [isAuthLoading, setIsAuthLoading] = useState(true);
-  // const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
 
   async function signup(name, email, password) {
     setIsAuthLoading(true);
@@ -16,9 +17,18 @@ function AuthProvider({ children }) {
         email,
         password,
       });
-      console.log(res);
+      if (res.status === 200) {
+        toast.success("User created successfully");
+        return { status: "success" };
+      }
     } catch (error) {
-      console.log("signup error", error);
+      if (error?.response?.status === 409) {
+        toast.error("User already exists");
+        return { status: "error", message: "User already exists" };
+      } else {
+        toast.error("Something went wrong");
+        return { status: "error", message: "Something went wrong" };
+      }
     } finally {
       setIsAuthLoading(false);
     }
@@ -27,17 +37,34 @@ function AuthProvider({ children }) {
   async function login(email, password) {
     setIsAuthLoading(true);
 
-    console.log(email, password);
-
     try {
       const res = await axiosPublic.post("/auth/login", {
         email,
         password,
       });
-      console.log(res.data);
-      return { status: "success" };
+      if (res.status === 200) {
+        setUser({
+          name: res.data.name,
+          email: res.data.email,
+          id: res.data.id,
+        });
+
+        toast.success("Login successful");
+        return { status: "succes" };
+      }
     } catch (error) {
-      console.log(error);
+      if (error?.response?.status === 401) {
+        if (error?.response?.data?.message === "Invalid password") {
+          toast.error("Invalid credentials");
+          return { status: "error", message: "Invalid credentials" };
+        } else if (error?.response?.data?.message === "User does not exist") {
+          toast.error("User does not exist");
+          return { status: "error", message: "User does not exist" };
+        }
+      } else {
+        toast.error("Something went wrong");
+        return { status: "error", message: "Something went wrong" };
+      }
     }
   }
 
@@ -47,7 +74,7 @@ function AuthProvider({ children }) {
     // }
   }, []);
 
-  const value = { signup, isAuthLoading, login };
+  const value = { signup, isAuthLoading, login, user };
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 }
 

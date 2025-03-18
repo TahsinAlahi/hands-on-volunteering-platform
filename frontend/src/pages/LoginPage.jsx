@@ -80,10 +80,10 @@ function LoginPage() {
           <h3 className="mt-4 text-sm">
             Don&apos;t have an account?{" "}
             <Link
-              to="/register"
+              to="/signup"
               className="text-purple-900 hover:border-navbar border-b-2 border-transparent transition-all duration-200 font-semibold"
             >
-              Register
+              Signup
             </Link>
           </h3>
         </div>
