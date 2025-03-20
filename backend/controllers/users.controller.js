@@ -34,7 +34,6 @@ async function getUserData(req, res, next) {
     };
 
     delete modifiedUser.volunteerHistory;
-    delete modifiedUser._id;
 
     res.status(200).json(modifiedUser);
   } catch (error) {
