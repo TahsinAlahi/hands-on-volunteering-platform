@@ -54,12 +54,8 @@ function ProfilePage() {
             </div>
           ) : (
             // Edit profile
-            <>
-              <EditProfileForm
-                user={data}
-                onClose={() => setIsEditOpen(false)}
-              />
-            </>
+
+            <EditProfileForm user={data} onClose={() => setIsEditOpen(false)} />
           )}
 
           <div>

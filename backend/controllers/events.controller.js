@@ -38,7 +38,10 @@ async function createEvent(req, res, next) {
 // get all the events
 async function getEvents(_req, res, next) {
   try {
-    const events = await eventsModel.find();
+    const events = await eventsModel
+      .find()
+      .populate({ path: "createdBy", select: "name" });
+
     res.status(200).json(events);
   } catch (error) {
     next(error);
