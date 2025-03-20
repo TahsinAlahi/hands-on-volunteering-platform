@@ -31,7 +31,7 @@ function HomePage() {
               Login
             </Link>
             <Link
-              to="/register"
+              to="/signup"
               className="font-semibold text-black bg-accent hover:bg-secondary hover:text-white px-5 py-1 rounded-lg transition duration-300 ease-in-out text-center"
             >
               Sign up

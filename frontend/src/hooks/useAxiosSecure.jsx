@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useAuth } from "../providers/AuthProvider";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 function useAxiosSecure() {
