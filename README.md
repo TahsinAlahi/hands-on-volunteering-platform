@@ -1,8 +1,14 @@
 # HandsOn - Social Volunteering Platform
 
+---
+
 ## 📌 Project Overview
 
-HandsOn is a community-driven social volunteering platform that connects individuals with volunteering opportunities. Users can register, manage their profiles, discover volunteer events, and offer or request community help. This platform fosters collaboration and gives back to society by making volunteer events more accessible.
+HandsOn is a community-driven platform designed to connect individuals with volunteering opportunities. It allows users to sign up, manage their profiles, explore available volunteer events, and request or offer help within the community. The platform aims to enhance collaboration and make volunteering more accessible, encouraging people to give back to society.
+
+### [Frontend Link](https://handson-frontend.vercel.app/)
+
+### [Backend Link](https://handson-server.vercel.app/)
 
 ---
 
