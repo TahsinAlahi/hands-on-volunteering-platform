@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const jwtVerify = require("./middlewares/jwtChecker.js");
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL],
+    origin: "https://handson-frontend.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
