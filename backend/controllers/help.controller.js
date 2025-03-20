@@ -26,7 +26,9 @@ async function createHelp(req, res, next) {
 // get all the help requests
 async function getHelps(_req, res, next) {
   try {
-    const helps = await helpModel.find();
+    const helps = await helpModel
+      .find()
+      .populate({ path: "createdBy", select: "name" });
     res.status(200).json(helps);
   } catch (error) {
     next(error);

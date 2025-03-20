@@ -6,6 +6,7 @@ import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
 import CreateEventPage from "./pages/CreateEventPage";
 import EventsPage from "./pages/EventsPage";
+import HelpRequests from "./pages/HelpRequests";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "events",
         element: <EventsPage />,
+      },
+      {
+        path: "help-requests",
+        element: <HelpRequests />,
       },
     ],
   },

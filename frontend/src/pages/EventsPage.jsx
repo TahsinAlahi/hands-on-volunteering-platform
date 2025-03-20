@@ -32,8 +32,6 @@ function EventsPage() {
     return isTitleMatch && isCategoryMatch;
   });
 
-  console.log(filteredEvents);
-
   return (
     <div className="w-full min-h-screen">
       <main className="mx-auto flex flex-col items-center justify-center h-full my-10 px-6">
