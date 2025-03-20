@@ -35,6 +35,23 @@ async function getHelps(_req, res, next) {
   }
 }
 
+async function getHelpById(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const help = await helpModel
+      .findById(id)
+      .populate({ path: "responses.userId", select: "name" })
+      .populate({ path: "createdBy", select: "name" });
+
+    if (!help) throw createHttpErrors(404, "Help not found");
+
+    res.status(200).json(help);
+  } catch (error) {
+    next(error);
+  }
+}
+
 async function addResponseForHelp(req, res, next) {
   try {
     const { id } = req.params;
@@ -62,4 +79,4 @@ async function addResponseForHelp(req, res, next) {
   }
 }
 
-module.exports = { createHelp, getHelps, addResponseForHelp };
+module.exports = { createHelp, getHelps, addResponseForHelp, getHelpById };

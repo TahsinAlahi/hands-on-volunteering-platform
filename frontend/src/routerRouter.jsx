@@ -7,6 +7,7 @@ import ProfilePage from "./pages/ProfilePage";
 import CreateEventPage from "./pages/CreateEventPage";
 import EventsPage from "./pages/EventsPage";
 import HelpRequests from "./pages/HelpRequests";
+import HelpDetailsPage from "./pages/HelpDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "help-requests",
         element: <HelpRequests />,
+      },
+      {
+        path: "help-requests/:id",
+        element: <HelpDetailsPage />,
       },
     ],
   },
