@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import RootLayout from "./layouts/RootLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Loader from "./components/Loader";
+import ErrorPage from "./pages/ErrorPage";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "*",
+    element: withSuspense(ErrorPage),
   },
 ]);
 
