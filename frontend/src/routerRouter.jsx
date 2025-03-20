@@ -1,13 +1,23 @@
 import { createBrowserRouter } from "react-router";
+import { lazy, Suspense } from "react";
 import RootLayout from "./layouts/RootLayout";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import ProfilePage from "./pages/ProfilePage";
-import CreateEventPage from "./pages/CreateEventPage";
-import EventsPage from "./pages/EventsPage";
-import HelpRequests from "./pages/HelpRequests";
-import HelpDetailsPage from "./pages/HelpDetailsPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const SignupPage = lazy(() => import("./pages/SignupPage"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const CreateEventPage = lazy(() => import("./pages/CreateEventPage"));
+const EventsPage = lazy(() => import("./pages/EventsPage"));
+const HelpRequests = lazy(() => import("./pages/HelpRequests"));
+const HelpDetailsPage = lazy(() => import("./pages/HelpDetailsPage"));
+
+// eslint-disable-next-line no-unused-vars
+const withSuspense = (Component) => (
+  <Suspense fallback={<></>}>
+    <Component />
+  </Suspense>
+);
 
 const router = createBrowserRouter([
   {
@@ -16,35 +26,39 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: withSuspense(HomePage),
       },
       {
         path: "login",
-        element: <LoginPage />,
+        element: withSuspense(LoginPage),
       },
       {
         path: "signup",
-        element: <SignupPage />,
+        element: withSuspense(SignupPage),
       },
       {
         path: "profile",
-        element: <ProfilePage />,
+        element: <ProtectedRoute>{withSuspense(ProfilePage)}</ProtectedRoute>,
       },
       {
         path: "create-event",
-        element: <CreateEventPage />,
+        element: (
+          <ProtectedRoute>{withSuspense(CreateEventPage)}</ProtectedRoute>
+        ),
       },
       {
         path: "events",
-        element: <EventsPage />,
+        element: <ProtectedRoute>{withSuspense(EventsPage)}</ProtectedRoute>,
       },
       {
         path: "help-requests",
-        element: <HelpRequests />,
+        element: <ProtectedRoute>{withSuspense(HelpRequests)}</ProtectedRoute>,
       },
       {
         path: "help-requests/:id",
-        element: <HelpDetailsPage />,
+        element: (
+          <ProtectedRoute>{withSuspense(HelpDetailsPage)}</ProtectedRoute>
+        ),
       },
     ],
   },

@@ -9,7 +9,7 @@ function DataErrorPage() {
       </h1>
       <p className="text-xl">Please try again later</p>
       <Link
-        to="/home"
+        to="/"
         className="text-lg px-4 py-1 border-black border-1 rounded-md font-semibold"
       >
         Go back

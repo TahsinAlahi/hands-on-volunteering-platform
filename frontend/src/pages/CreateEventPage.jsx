@@ -42,7 +42,7 @@ function CreateEventPage() {
 
     if (res.status === 201) {
       toast.success("Event created successfully");
-      navigate("/home");
+      navigate("/events");
     }
   }
 

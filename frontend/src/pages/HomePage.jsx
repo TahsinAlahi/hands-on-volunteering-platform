@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 import bgImage from "../assets/homepage-bg.jpg";
+import { useAuth } from "../providers/AuthProvider";
 
 function HomePage() {
+  const { user } = useAuth();
   return (
     <div
       className="w-screen h-[calc(100vh-56px)] lg:h-[calc(100vh-58px)] bg-cover bg-right-bottom md:bg-left lg:bg-center bg-blend-multiply bg-black/45"
@@ -23,20 +25,38 @@ function HomePage() {
               of a community that cares. 🤝✨
             </p>
           </div>
-          <div className="space-x-3 text-lg mt-7">
-            <Link
-              to="/login"
-              className="font-semibold bg-accent text-black hover:bg-secondary hover:text-white px-5 py-1  rounded-lg transition duration-300 ease-in-out text-center"
-            >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              className="font-semibold text-black bg-accent hover:bg-secondary hover:text-white px-5 py-1 rounded-lg transition duration-300 ease-in-out text-center"
-            >
-              Sign up
-            </Link>
-          </div>
+          {user?.id ? (
+            <div className="space-x-3 text-lg mt-7">
+              <Link
+                to="/events"
+                className="font-semibold bg-accent text-black hover:bg-secondary hover:text-white px-5 py-1  rounded-lg transition duration-300 ease-in-out text-center mt-7"
+              >
+                Events
+              </Link>
+
+              <Link
+                to="/help-requests"
+                className="font-semibold bg-accent text-black hover:bg-secondary hover:text-white px-5 py-1  rounded-lg transition duration-300 ease-in-out text-center mt-7"
+              >
+                Help Requests
+              </Link>
+            </div>
+          ) : (
+            <div className="space-x-3 text-lg mt-7">
+              <Link
+                to="/login"
+                className="font-semibold bg-accent text-black hover:bg-secondary hover:text-white px-5 py-1  rounded-lg transition duration-300 ease-in-out text-center"
+              >
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                className="font-semibold text-black bg-accent hover:bg-secondary hover:text-white px-5 py-1 rounded-lg transition duration-300 ease-in-out text-center"
+              >
+                Sign up
+              </Link>
+            </div>
+          )}
         </div>
       </main>
     </div>

@@ -27,7 +27,7 @@ function RegisterPage() {
 
     const res = await signup(data.displayName, data.email, data.password);
 
-    if (res.status === "success") navigate(state?.from || "/home");
+    if (res.status === "success") navigate(state?.from || "/");
   }
 
   return (
