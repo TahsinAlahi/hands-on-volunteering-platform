@@ -6,6 +6,7 @@ import ProfileEventCard from "../components/ProfileEventCard";
 import EditProfileForm from "../components/EditProfileForm";
 import { Link } from "react-router";
 import DataErrorPage from "../components/DataErrorPage";
+import Loader from "../components/Loader";
 
 function ProfilePage() {
   const { user } = useAuth();
@@ -27,7 +28,7 @@ function ProfilePage() {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   return (

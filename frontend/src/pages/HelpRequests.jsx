@@ -6,6 +6,7 @@ import HelpRequestCard from "../components/HelpRequestCard";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../providers/AuthProvider";
 import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 function HelpRequests() {
   const axiosSecure = useAxiosSecure();
@@ -33,7 +34,7 @@ function HelpRequests() {
     }
   }
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader />;
   if (isError) return <DataErrorPage />;
 
   return (

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import { lazy, Suspense } from "react";
 import RootLayout from "./layouts/RootLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Loader from "./components/Loader";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
@@ -14,7 +15,7 @@ const HelpDetailsPage = lazy(() => import("./pages/HelpDetailsPage"));
 
 // eslint-disable-next-line no-unused-vars
 const withSuspense = (Component) => (
-  <Suspense fallback={<></>}>
+  <Suspense fallback={<Loader />}>
     <Component />
   </Suspense>
 );

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 const authContext = createContext(null);
 
@@ -97,7 +98,7 @@ function AuthProvider({ children }) {
     setIsAuthLoading(false);
   }, [user]);
 
-  if (isAuthLoading) return <h1>Loading...</h1>;
+  if (isAuthLoading) return <Loader />;
 
   const value = { signup, isAuthLoading, login, user, logout };
   return <authContext.Provider value={value}>{children}</authContext.Provider>;

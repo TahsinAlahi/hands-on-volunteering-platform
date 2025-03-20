@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import DataErrorPage from "../components/DataErrorPage";
 import { toast } from "react-toastify";
 import { useAuth } from "../providers/AuthProvider";
+import Loader from "../components/Loader";
 
 function HelpDetailsPage() {
   const { id } = useParams();
@@ -42,7 +43,7 @@ function HelpDetailsPage() {
     }
   }
 
-  if (isLoading) return <p className="text-center mt-5">Loading...</p>;
+  if (isLoading) return <Loader />;
   if (error) return <DataErrorPage />;
 
   return (

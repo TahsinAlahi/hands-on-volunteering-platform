@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import DataErrorPage from "../components/DataErrorPage";
 import EventCard from "../components/EventCard";
 import { IoSearch } from "react-icons/io5";
+import Loader from "../components/Loader";
 
 function EventsPage() {
   const axiosSecure = useAxiosSecure();
@@ -18,7 +19,7 @@ function EventsPage() {
     },
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader />;
   if (error) return <DataErrorPage />;
 
   const filteredEvents = data.filter((event) => {
