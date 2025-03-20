@@ -63,7 +63,7 @@ async function updateUserData(req, res, next) {
 
     await user.save();
 
-    res.status(200).json(user);
+    res.status(200).json({ message: "User updated successfully" });
   } catch (error) {
     next(error);
   }
