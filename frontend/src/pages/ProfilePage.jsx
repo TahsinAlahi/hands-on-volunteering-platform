@@ -31,7 +31,7 @@ function ProfilePage() {
   }
 
   return (
-    <div className=" w-full min-h-svh">
+    <div className="w-full min-h-svh">
       <main className="mx-auto flex flex-col items-center justify-center h-full mt-8 px-4">
         <h1 className="text-3xl font-semibold border-b-2 border-black capitalize">
           Welcome,{user.name}
