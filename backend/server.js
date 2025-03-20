@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const jwtVerify = require("./middlewares/jwtChecker.js");
 
 const PORT = process.env.PORT || 3001;
 
@@ -19,8 +20,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    // TODO: Fix this origin for production
-    origin: "http://localhost:5173",
+    origin: [process.env.CLIENT_URL],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -33,9 +33,9 @@ app.get("/", (_req, res) => {
 
 // Routes
 app.use("/api/auth", require("./routes/auth.route.js"));
-app.use("/api/users", require("./routes/users.route.js"));
-app.use("/api/events", require("./routes/events.route.js"));
-app.use("/api/help", require("./routes/help.route.js"));
+app.use("/api/users", jwtVerify, require("./routes/users.route.js"));
+app.use("/api/events", jwtVerify, require("./routes/events.route.js"));
+app.use("/api/help", jwtVerify, require("./routes/help.route.js"));
 
 // All other unknown routes
 app.get("*", (_req, _res) => {
